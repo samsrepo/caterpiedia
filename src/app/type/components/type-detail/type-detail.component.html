@@ -1,0 +1,63 @@
+<div *ngIf="type" class="container">
+  <div class="row">
+    <div class="col-12 mt-3 mb-3">
+      <h1>{{type.name | titlecase}}</h1>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="row">
+        <div class="col-12">
+          <h5>Damage Class</h5>
+        </div>
+        <div class="col-12">
+          <p>{{type.move_damage_class | titlecase}}</p>
+          <p class="ml-3 mt-2" *ngIf="!type.move_damage_class">None</p>
+        </div>
+        <div class="col-12">
+          <h5 class="mt-3">Super Effective Against</h5>
+        </div>
+        <p class="ml-3 mt-2" *ngIf="type.double_damage_to.length == 0">None</p>
+        <span *ngFor="let superAgainst of type.double_damage_to" [ngClass]="superAgainst" class="pb-2 pt-1 ml-3 mt-2 text-white text-center rounded font-weight-bold col-3" (click)="typeSelected.emit(superAgainst)">
+          {{superAgainst | titlecase}}
+        </span>
+        <div class="col-12">
+          <h5 class="mt-3">Weak Against</h5>
+        </div>
+        <p class="ml-3 mt-2" *ngIf="type.half_damage_to.length == 0">None</p>
+        <span *ngFor="let weakAgainst of type.half_damage_to" [ngClass]="weakAgainst" class="pb-2 pt-1 ml-3 mt-2 text-white text-center rounded font-weight-bold col-3" (click)="typeSelected.emit(weakAgainst)">
+          {{weakAgainst | titlecase}}
+        </span>
+        <div class="col-12">
+          <h5 class="mt-3">Immune to</h5>
+        </div>
+        <p class="ml-3 mt-2" *ngIf="type.no_damage_from.length == 0">None</p>
+        <span *ngFor="let immuneTo of type.no_damage_from" [ngClass]="immuneTo" class="pb-2 pt-1 ml-3 mt-2 text-white text-center rounded font-weight-bold col-3" (click)="typeSelected.emit(immuneTo)">
+          {{immuneTo | titlecase}}
+        </span>
+        <div class="col-12">
+          <h5 class="mt-3">Types super effective against {{type.name | titlecase}}</h5>
+        </div>
+        <p class="ml-3 mt-2" *ngIf="type.half_damage_to.length == 0">None</p>
+        <span *ngFor="let superEffective of type.half_damage_to" [ngClass]="superEffective" class="pb-2 pt-1 ml-3 mt-2 text-white text-center rounded font-weight-bold col-3" (click)="typeSelected.emit(superEffective)">
+          {{superEffective | titlecase}}
+        </span>
+        <div class="col-12">
+          <h5 class="mt-3">Types not effective against {{type.name | titlecase}}</h5>
+        </div>
+        <p class="ml-3 mt-2" *ngIf="type.half_damage_from.length == 0">None</p>
+        <span *ngFor="let notEffective of type.half_damage_from" [ngClass]="notEffective" class="pb-2 pt-1 ml-3 mt-2 text-white text-center rounded font-weight-bold col-3" (click)="typeSelected.emit(notEffective)">
+          {{notEffective | titlecase}}
+        </span>
+        <h5 class="col-12 mt-3">Move Set</h5>
+        <ul class="col-12">
+          <p class="ml-3 mt-2" *ngIf="type.moves.length == 0">None</p>
+          <li class="ml-3" *ngFor="let move of type.moves">{{move}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <h5>{{type.name | titlecase}} type Pokemon</h5>
+      <p class="ml-3 mt-2" *ngIf="type.pokemon.length == 0">None</p>
+      <app-pokemon-list [pokemonList]="type.pokemon" (pokemonSelected)="pokemonSelected.emit($event)"></app-pokemon-list>
+    </div>
+  </div>
+</div>

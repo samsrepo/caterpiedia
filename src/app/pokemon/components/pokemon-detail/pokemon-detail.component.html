@@ -1,0 +1,23 @@
+<div *ngIf="pokemonDetails" class="container">
+  <div class="row">
+    <div class="col-12 mt-3 mb-3">
+      <h1>{{pokemonDetails.name | titlecase}}</h1>
+    </div>
+    <div class="col-12 col-md-6">
+      <span *ngFor="let type of pokemonDetails.types" [ngClass]="type" class="pt-1 pb-1 pl-4 pr-4 m-2 text-white rounded font-weight-bold">{{type | titlecase}}</span>
+      <img class="d-block m-5" [src]="pokemonDetails.image"/>
+    <h5>ID #</h5>
+    <p>{{pokemonDetails.id}}</p>
+    <h5>Height</h5>
+    <p>{{pokemonDetails.height*0.1 | number : '1.2-2'}} meters</p>
+    <h5>Weight</h5>
+    <p>{{pokemonDetails.weight*0.1 | number : '1.2-2'}} kilograms</p>
+    </div>
+    <div class="col-12 col-md-6">
+      <h5>Move Set</h5>
+      <ul>
+      <li *ngFor="let move of pokemonDetails.moves">{{move}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
